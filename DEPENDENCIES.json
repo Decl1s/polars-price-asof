@@ -1,0 +1,14 @@
+{
+  "python_recommended_and_ci": "3.14.10",
+  "python_local": "3.14.4",
+  "python_minimum": "3.11",
+  "direct": {"polars": "2.1.0"},
+  "transitive": {"polars-runtime-32": "2.1.0"},
+  "hash_lock": "requirements.lock",
+  "uv_local": "0.13.1",
+  "git_local": "2.53.0",
+  "actions": {
+    "actions/checkout": {"version":"7.0.1","commit":"3d3c42e5aac5ba805825da76410c181273ba90b1"},
+    "actions/setup-python": {"version":"7.1.0","commit":"6d4fd22b20465ccc0f7354476588e8df7c9ca0e0"}
+  }
+}

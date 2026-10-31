@@ -1,0 +1,9 @@
+{
+  "version":"2.0.0",
+  "tasks":[
+    {"label":"Я генерирую заказы и цены","type":"process","command":"python","args":["-m","price_asof","generate","--out","artifacts/input"],"options":{"cwd":"${workspaceFolder}","env":{"PYTHONUTF8":"1"}},"problemMatcher":[]},
+    {"label":"Я подбираю действовавшие цены","type":"process","command":"python","args":["-m","price_asof","run","--orders","artifacts/input/orders.jsonl","--prices","artifacts/input/prices.jsonl","--out","artifacts/result"],"options":{"cwd":"${workspaceFolder}","env":{"PYTHONUTF8":"1"}},"problemMatcher":[]},
+    {"label":"Я смотрю решения","type":"process","command":"python","args":["-m","price_asof","inspect","--out","artifacts/result"],"options":{"cwd":"${workspaceFolder}","env":{"PYTHONUTF8":"1"}},"problemMatcher":[]},
+    {"label":"Я проверяю проект","type":"process","command":"python","args":["scripts/ci.py"],"options":{"cwd":"${workspaceFolder}","env":{"PYTHONUTF8":"1"}},"problemMatcher":[]}
+  ]
+}
