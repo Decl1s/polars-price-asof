@@ -1,5 +1,6 @@
 """Я проверяю бизнес-правила и независимый простой oracle вместо копирования asof-кода."""
 import json
+import os
 from pathlib import Path
 import random
 import subprocess
@@ -143,6 +144,12 @@ class AsOfTests(unittest.TestCase):
         output=self.root/'result';run(self.orders,self.prices,output)
         with (output/'priced.parquet').open('ab') as f:f.write(b'changed')
         with self.assertRaises(PipelineError):inspect(output)
+
+    def test_python_datetime_without_system_tz_database(self):
+        # Я воспроизвожу отсутствие системной IANA базы, типичное для Windows.
+        code = "from datetime import datetime,timezone; import polars as pl; f=pl.DataFrame({'at':[datetime(2026,10,31,tzinfo=timezone.utc)]},schema={'at':pl.Datetime('us','UTC')}); assert f.to_dicts()[0]['at'].isoformat()=='2026-10-31T00:00:00+00:00'"
+        result=subprocess.run([sys.executable,'-c',code],env={**os.environ,'PYTHONTZPATH':''},capture_output=True,text=True,timeout=30)
+        self.assertEqual(result.returncode,0,result.stderr)
 
     def test_cli_generate_run_inspect(self):
         def cli(*args,success=True):

@@ -8,7 +8,7 @@
 | `price_asof/contract.py` | Я проверяю точные типы/ключи и строю typed DataFrames | Схемы, диапазоны и правила входа |
 | `price_asof/pipeline.py` | Я связываю backward join, возраст, статусы и публикацию | calculate, summary_for, run, inspect |
 | `price_asof/__main__.py` | Я оставил generate/run/inspect и понятные ошибки | Аргументы, вывод и preview |
-| `tests/test_asof.py` | Я проверяю19 сценариев и отдельный простой oracle | Новые границы до изменения алгоритма |
+| `tests/test_asof.py` | Я проверяю20 сценариев и отдельный простой oracle | Новые границы до изменения алгоритма |
 | `scripts/ci.py` | Я проверяю CLI, пять заданий, repeat и отказ | Дополнительные пользовательские опыты |
 | `requirements.in` / `requirements.lock` | Я закрепил Polars и единственный runtime с хешами | Обновление версии отдельным изменением |
 | `scripts/package_release.py` | Я проверяю Git root/allowlist и source ZIP | Каждый новый исходник явно добавляю в PUBLIC_FILES |

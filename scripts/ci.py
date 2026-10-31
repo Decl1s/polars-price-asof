@@ -16,11 +16,11 @@ def cli(*args, success=True):
 
 
 def main():
-    versions={name:importlib.metadata.version(name) for name in ['polars','polars-runtime-32']}
-    if versions!={'polars':'2.1.0','polars-runtime-32':'2.1.0'}:
+    versions={name:importlib.metadata.version(name) for name in ['polars','polars-runtime-32','tzdata']}
+    if versions!={'polars':'2.1.0','polars-runtime-32':'2.1.0','tzdata':'2026.6'}:
         raise RuntimeError('Я ожидаю закреплённые runtime distributions')
     tests=subprocess.run([sys.executable,'-m','unittest','discover','-s','tests','-v'],cwd=ROOT,capture_output=True,encoding='utf-8',timeout=90)
-    if tests.returncode or 'Ran 19 tests' not in tests.stderr:
+    if tests.returncode or 'Ran 20 tests' not in tests.stderr:
         raise RuntimeError(tests.stderr)
     from price_asof.demo import data
     with tempfile.TemporaryDirectory(prefix='price-asof-') as tmp:
@@ -61,7 +61,7 @@ def main():
         if (base/'ambiguous').exists():raise RuntimeError('Я опубликовал неоднозначный join')
     archive=package()
     if package()!=archive:raise RuntimeError('Я получил разный ZIP')
-    print(json.dumps({'python':sys.version.split()[0],'dependencies':versions,'tests':19,'demo':baseline['counts'],'exercises':5,'logical_replay':True,'no_partial_output':True,'archive':archive},ensure_ascii=False))
+    print(json.dumps({'python':sys.version.split()[0],'dependencies':versions,'tests':20,'demo':baseline['counts'],'exercises':5,'logical_replay':True,'no_partial_output':True,'archive':archive},ensure_ascii=False))
 
 
 if __name__=='__main__':
